@@ -9,8 +9,20 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Inicializa a conexão com banco de dados Neon ou modo Mock
-db.initDb();
+let dbReady = false;
+
+app.use(async (req, res, next) => {
+  if (!dbReady) {
+    try {
+      await db.initDb();
+      dbReady = true;
+    } catch (err) {
+      console.error('Erro ao conectar ao banco:', err);
+      return res.status(503).json({ error: 'Banco de dados indisponível' });
+    }
+  }
+  next();
+});
 
 // ----------------------------------------------------
 // ROTAS DE PRODUTOS (CARDÁPIO)
