@@ -1,0 +1,186 @@
+version: "2"
+type: frontend
+tech_stack:
+  - React 19
+  - Vite 8
+  - JavaScript (ESM)
+  - CSS (Vanilla)
+  - Node.js Express (backend API)
+  - PostgreSQL / Mock DB (Neon)
+features:
+  - name: Dashboard
+    description: Displays today's sales totals, pending and completed order counts, and a top-selling products chart
+    files:
+      - frontend/src/components/DashboardView.jsx
+    endpoints:
+      - method: GET
+        path: /api/stats
+        description: Returns today's sales, order counts, and top products
+        auth_required: false
+        response_schema:
+          "200": "{ todaySales, todayOrdersCount, pendingOrdersCount, completedOrdersCount, topProducts }"
+          "500": Error message
+    depends_on: []
+
+  - name: Product Management (Cardápio)
+    description: CRUD interface for managing products including name, price, category, and description
+    files:
+      - frontend/src/components/ProductsView.jsx
+    endpoints:
+      - method: GET
+        path: /api/products
+        description: List all products ordered by category and name
+        auth_required: false
+        response_schema:
+          "200": Product[]
+          "500": Error message
+      - method: POST
+        path: /api/products
+        description: Create a new product
+        auth_required: false
+        request_schema:
+          body:
+            name: string
+            price: number
+            category: string
+            description: string
+        response_schema:
+          "201": Product
+          "400": Validation error
+          "500": Error message
+      - method: PUT
+        path: /api/products/:id
+        description: Update an existing product
+        auth_required: false
+        request_schema:
+          body:
+            name: string
+            price: number
+            category: string
+            description: string
+        response_schema:
+          "200": Product
+          "400": Validation error
+          "404": Not found
+          "500": Error message
+      - method: DELETE
+        path: /api/products/:id
+        description: Delete a product by ID
+        auth_required: false
+        response_schema:
+          "200": Success message
+          "500": Error message
+    depends_on: []
+
+  - name: Point of Sale (PDV)
+    description: POS interface for selecting products, managing a shopping cart, applying discounts, choosing payment method and order type, and finalizing sales
+    files:
+      - frontend/src/components/POSView.jsx
+      - frontend/src/components/ReceiptModal.jsx
+    endpoints:
+      - method: GET
+        path: /api/products
+        description: Fetch product catalog for the POS
+        auth_required: false
+        response_schema:
+          "200": Product[]
+      - method: POST
+        path: /api/orders
+        description: Submit a completed order
+        auth_required: false
+        request_schema:
+          body:
+            customer_name: string
+            table_number: string
+            order_type: string
+            payment_method: string
+            status: string
+            subtotal: number
+            discount: number
+            total: number
+            items: OrderItem[]
+        response_schema:
+          "201": "{ id, message }"
+          "400": Validation error
+          "500": Error message
+    depends_on:
+      - Product Management (Cardápio)
+
+  - name: Orders Management (Pedidos)
+    description: View and manage all orders, filter by status, and update order status (Pendente, Pago, Cancelado)
+    files:
+      - frontend/src/components/OrdersView.jsx
+    endpoints:
+      - method: GET
+        path: /api/orders
+        description: List all orders ordered by creation date descending
+        auth_required: false
+        response_schema:
+          "200": Order[]
+          "500": Error message
+      - method: GET
+        path: /api/orders/:id
+        description: Get a specific order with its items
+        auth_required: false
+        response_schema:
+          "200": "Order with items[]"
+          "404": Not found
+          "500": Error message
+      - method: GET
+        path: /api/orders/:id/items
+        description: Get items of a specific order
+        auth_required: false
+        response_schema:
+          "200": OrderItem[]
+          "500": Error message
+      - method: PUT
+        path: /api/orders/:id/status
+        description: Update the status of an order
+        auth_required: false
+        request_schema:
+          body:
+            status: string
+        response_schema:
+          "200": Order
+          "400": Validation error
+          "404": Not found
+          "500": Error message
+      - method: PATCH
+        path: /api/orders/:id/status
+        description: Update the status of an order (PATCH alias)
+        auth_required: false
+        request_schema:
+          body:
+            status: string
+        response_schema:
+          "200": Order
+          "400": Validation error
+          "404": Not found
+          "500": Error message
+    depends_on: []
+
+  - name: Settings (Configurações)
+    description: Application settings interface for configuring business name, backend URL, and other preferences
+    files:
+      - frontend/src/components/SettingsView.jsx
+    endpoints: []
+    depends_on: []
+
+  - name: Receipt Modal
+    description: Modal dialog that displays a formatted receipt/invoice after a sale is completed with print support
+    files:
+      - frontend/src/components/ReceiptModal.jsx
+    endpoints: []
+    depends_on:
+      - Point of Sale (PDV)
+
+known_limitations:
+  - issue: No authentication or authorization on any endpoint
+    location: backend/server.js
+    impact: All API routes are publicly accessible
+  - issue: Statistics aggregation is done in JavaScript after loading all orders (not in SQL)
+    location: backend/server.js (line 241-296)
+    impact: Poor performance at scale; should use SQL aggregation
+  - issue: Mock DB mode has incomplete order item querying for stats
+    location: backend/server.js (line 277)
+    impact: Stats may be inaccurate in mock mode

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "get api stats success and error handling",
+    "description": "Test GET /api/stats endpoint to verify it returns 200 with correct sales and order metrics and top products, and properly handles 500 server errors by showing an error state."
+  },
+  {
+    "id": "TC002",
+    "title": "get api products list ordered by category and name",
+    "description": "Test GET /api/products endpoint to ensure it returns 200 with a list of products ordered by category and name, and handles server errors gracefully."
+  },
+  {
+    "id": "TC003",
+    "title": "post api products create new product validation and success",
+    "description": "Test POST /api/products endpoint with valid product data to create a new product and receive 201 response, and with invalid or incomplete data to receive 400 validation errors."
+  },
+  {
+    "id": "TC004",
+    "title": "put api products update existing product success and errors",
+    "description": "Test PUT /api/products/:id endpoint to update an existing product with valid data returning 200, handle 400 validation errors for invalid data, and 404 not found for non-existent product IDs."
+  },
+  {
+    "id": "TC005",
+    "title": "delete api products remove product by id",
+    "description": "Test DELETE /api/products/:id endpoint to delete a product by ID, verify 200 success response and that the product is removed from the list, and handle server errors."
+  },
+  {
+    "id": "TC006",
+    "title": "post api orders submit completed order success and validation",
+    "description": "Test POST /api/orders endpoint to submit a completed order with valid payload receiving 201 with order id and message, and with invalid subtotal, total, or items to receive 400 validation errors preventing order completion."
+  },
+  {
+    "id": "TC007",
+    "title": "get api orders list and order by creation date",
+    "description": "Test GET /api/orders endpoint to retrieve all orders ordered by creation date descending with 200 response, and handle server errors."
+  },
+  {
+    "id": "TC008",
+    "title": "get api orders by id with items and not found handling",
+    "description": "Test GET /api/orders/:id endpoint to retrieve specific order details including items with 200 response, and handle 404 not found error for invalid order IDs."
+  },
+  {
+    "id": "TC009",
+    "title": "put api orders update order status validation and errors",
+    "description": "Test PUT /api/orders/:id/status endpoint to update order status with valid status returning 200 and updated order, handle 400 validation errors for invalid status, and 404 not found for invalid order IDs."
+  },
+  {
+    "id": "TC010",
+    "title": "patch api orders update order status alias validation and errors",
+    "description": "Test PATCH /api/orders/:id/status endpoint as an alias to PUT for updating order status with valid status returning 200, handle 400 validation errors for invalid status, and 404 not found for invalid order IDs."
+  }
+]

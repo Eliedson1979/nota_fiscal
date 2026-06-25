@@ -1,0 +1,735 @@
+[
+  {
+    "id": "TC001",
+    "title": "Complete a POS sale and view the receipt",
+    "description": "This verifies a cashier can build a cart, choose checkout details, submit the order, and see the receipt modal after a successful sale.",
+    "category": "Point of Sale (PDV)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the POS checkout screen"
+      },
+      {
+        "type": "action",
+        "description": "Add one or more products to the cart"
+      },
+      {
+        "type": "action",
+        "description": "Set the customer or order details required for checkout"
+      },
+      {
+        "type": "action",
+        "description": "Apply a discount if supported by the cart"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "action",
+        "description": "Select an order type"
+      },
+      {
+        "type": "action",
+        "description": "Submit the order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a confirmation is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the receipt modal opens"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Inspect an order and update its status",
+    "description": "This verifies a user can find an existing order, open its details, and change the status from pending to paid or canceled.",
+    "category": "Order Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders screen"
+      },
+      {
+        "type": "action",
+        "description": "Open an existing pending order"
+      },
+      {
+        "type": "action",
+        "description": "Open the order details view"
+      },
+      {
+        "type": "action",
+        "description": "Change the order status"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated order status is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order details remain accessible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Update an order to paid",
+    "description": "A user can change an existing order from pending to paid and see the updated status reflected in the interface.",
+    "category": "Orders Management (Pedidos)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders management page"
+      },
+      {
+        "type": "action",
+        "description": "Open an order from the list"
+      },
+      {
+        "type": "action",
+        "description": "Change the order status to paid"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated status is reflected in the order view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order list shows the updated status badge"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Browse recent orders",
+    "description": "A user can open the orders view and see the most recent orders listed for review.",
+    "category": "Orders Management (Pedidos)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders management page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify recent order entries are visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Create a new menu item",
+    "description": "This verifies staff can add a product with name, price, category, and description and see it appear in the catalog.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management screen"
+      },
+      {
+        "type": "action",
+        "description": "Open the create product form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the product name field with a unique item name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the price field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Select a category"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the description field with a short product description"
+      },
+      {
+        "type": "action",
+        "description": "Submit the product form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new product appears in the catalog"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Manage the product catalog",
+    "description": "A user can list products, add a new product, edit it, and remove an obsolete product from the catalog.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Create a new product"
+      },
+      {
+        "type": "action",
+        "description": "Open the newly created product for editing"
+      },
+      {
+        "type": "action",
+        "description": "Update the product details"
+      },
+      {
+        "type": "action",
+        "description": "Delete the product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list is displayed without the deleted product"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Inspect an order and its items",
+    "description": "A user can open a specific order to review its details and item breakdown.",
+    "category": "Orders Management (Pedidos)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders management page"
+      },
+      {
+        "type": "action",
+        "description": "Open an order from the list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order detail view is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order item list is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Edit an existing menu item",
+    "description": "This verifies staff can update an existing product’s pricing or details and see the changes reflected in the catalog.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management screen"
+      },
+      {
+        "type": "action",
+        "description": "Open an existing product for editing"
+      },
+      {
+        "type": "action",
+        "description": "Change the product name or details"
+      },
+      {
+        "type": "action",
+        "description": "Change the product price to a new valid value"
+      },
+      {
+        "type": "action",
+        "description": "Submit the changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated product is shown in the catalog"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "View today’s dashboard metrics",
+    "description": "This verifies the dashboard loads today’s sales, order counts, and top products so operators can monitor store performance.",
+    "category": "Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify today’s sales metrics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify today’s order counts and top-selling products are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Update an order to canceled",
+    "description": "A user can change an existing order status to canceled and see the updated status reflected in the interface.",
+    "category": "Orders Management (Pedidos)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders management page"
+      },
+      {
+        "type": "action",
+        "description": "Open an order from the list"
+      },
+      {
+        "type": "action",
+        "description": "Change the order status to canceled"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated status is reflected in the order view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order list shows the updated status badge"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "View current business metrics on the dashboard",
+    "description": "A user can open the dashboard and review today’s sales, order counts, and top-selling products.",
+    "category": "Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the dashboard page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify today’s sales data is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order count metrics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify top-selling products are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Delete an obsolete menu item",
+    "description": "This verifies staff can remove an obsolete product and confirm it no longer appears in the catalog.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management screen"
+      },
+      {
+        "type": "action",
+        "description": "Create or select a product to remove"
+      },
+      {
+        "type": "action",
+        "description": "Open the delete action for that product"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is removed from the catalog"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "View the product catalog",
+    "description": "This verifies the product management screen lists existing products so staff can review the catalog.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product catalog is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify existing products are listed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC014",
+    "title": "Review current order activity from the dashboard",
+    "description": "This verifies a user can open the current order activity from the dashboard and reach order information for active operations.",
+    "category": "Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Click the entry point for current order activity"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify current order activity is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order details are accessible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC015",
+    "title": "Edit product details",
+    "description": "A user can update an existing product’s pricing, category, and description and see the changes saved in the catalog.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management page"
+      },
+      {
+        "type": "action",
+        "description": "Open a product for editing"
+      },
+      {
+        "type": "action",
+        "description": "Update the product details"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list reflects the updated product information"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC016",
+    "title": "Delete an obsolete product",
+    "description": "A user can remove an obsolete product from the catalog and confirm it no longer appears in the list.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management page"
+      },
+      {
+        "type": "action",
+        "description": "Open a product for editing"
+      },
+      {
+        "type": "action",
+        "description": "Delete the product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product no longer appears in the product list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC017",
+    "title": "View items inside an order",
+    "description": "This verifies a user can drill into an order and see its line items for operational review.",
+    "category": "Order Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders screen"
+      },
+      {
+        "type": "action",
+        "description": "Open an existing order"
+      },
+      {
+        "type": "action",
+        "description": "Open the item details for that order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order items are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify item-level details are visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC018",
+    "title": "Update business settings and continue using the app",
+    "description": "This verifies settings changes for business name and backend URL can be saved and the app still loads operational data afterward.",
+    "category": "Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the settings screen"
+      },
+      {
+        "type": "action",
+        "description": "Update the business name"
+      },
+      {
+        "type": "action",
+        "description": "Update the backend URL setting"
+      },
+      {
+        "type": "action",
+        "description": "Save the settings"
+      },
+      {
+        "type": "action",
+        "description": "Navigate back to the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated business name is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify dashboard data still loads"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC019",
+    "title": "Update business settings",
+    "description": "A user can change business settings and see the updated configuration applied in the interface.",
+    "category": "Settings (Configurações)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the settings page"
+      },
+      {
+        "type": "action",
+        "description": "Update the business name"
+      },
+      {
+        "type": "action",
+        "description": "Update the backend URL"
+      },
+      {
+        "type": "action",
+        "description": "Save the settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated settings are reflected in the interface"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC020",
+    "title": "Create a product with incomplete details",
+    "description": "This verifies the product form blocks submission when required fields are missing and shows validation feedback.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management screen"
+      },
+      {
+        "type": "action",
+        "description": "Open the create product form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in only part of the required product information"
+      },
+      {
+        "type": "action",
+        "description": "Submit the product form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation feedback is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is not added to the catalog"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC021",
+    "title": "Prevent checkout with invalid order totals",
+    "description": "This verifies the POS blocks checkout when the order totals or items are invalid and shows checkout validation feedback.",
+    "category": "Point of Sale (PDV)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the POS checkout screen"
+      },
+      {
+        "type": "action",
+        "description": "Add a product to the cart"
+      },
+      {
+        "type": "action",
+        "description": "Set checkout values that make the order invalid"
+      },
+      {
+        "type": "action",
+        "description": "Submit the order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify checkout validation feedback is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the sale is not completed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC022",
+    "title": "Update a product that is no longer available",
+    "description": "This verifies the product editor shows a not-found state when a user tries to update a product that cannot be found.",
+    "category": "Product Management (Cardápio)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product management screen"
+      },
+      {
+        "type": "action",
+        "description": "Create a new product to use for editing"
+      },
+      {
+        "type": "action",
+        "description": "Open the edit form for that product"
+      },
+      {
+        "type": "action",
+        "description": "Change the product details"
+      },
+      {
+        "type": "action",
+        "description": "Remove the product from the catalog"
+      },
+      {
+        "type": "action",
+        "description": "Submit the edit changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a not-found error state is shown"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC023",
+    "title": "Show an order-not-found state",
+    "description": "A user who opens a missing order sees a clear not-found state instead of an order detail view.",
+    "category": "Orders Management (Pedidos)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders management page"
+      },
+      {
+        "type": "action",
+        "description": "Open an order that does not exist"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an order-not-found message is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC024",
+    "title": "Show validation feedback for an invalid order status change",
+    "description": "A user sees validation feedback when attempting to set an order to an unsupported status.",
+    "category": "Orders Management (Pedidos)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the orders management page"
+      },
+      {
+        "type": "action",
+        "description": "Open an order from the list"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to change the order status to an invalid value"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a status validation error is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC025",
+    "title": "Show settings validation for incomplete changes",
+    "description": "A user sees validation feedback when trying to save incomplete settings.",
+    "category": "Settings (Configurações)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the settings page"
+      },
+      {
+        "type": "action",
+        "description": "Clear a required settings field"
+      },
+      {
+        "type": "action",
+        "description": "Save the settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a settings validation error is displayed"
+      }
+    ],
+    "priority": "Low"
+  }
+]
