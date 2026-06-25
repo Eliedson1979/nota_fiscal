@@ -249,6 +249,10 @@ app.get('/api/stats', async (req, res) => {
 });
 
 // Inicialização do Servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor Express rodando na porta ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor Express rodando na porta ${PORT}`);
+  });
+}
+
+module.exports = app;

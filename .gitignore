@@ -2,3 +2,5 @@ testsprite_tests/tmp/config.json
 backend/data.db
 .agents
 node_modules
+.env
+frontend/dist

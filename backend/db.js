@@ -1,31 +1,31 @@
-const Database = require('better-sqlite3');
-const path = require('path');
+const { Pool } = require('pg');
 const fs = require('fs');
-
+const path = require('path');
 require('dotenv').config();
 
-const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'data.db');
-let db;
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL && !process.env.DATABASE_URL.includes('localhost')
+    ? { rejectUnauthorized: false }
+    : false,
+});
 
-function initDb() {
-  console.log('📦 Inicializando banco SQLite...');
+let initialized = false;
 
-  db = new Database(DB_PATH);
+async function initDb() {
+  if (initialized) return;
+  initialized = true;
 
-  db.pragma('journal_mode = WAL');
-  db.pragma('foreign_keys = ON');
+  console.log('📦 Inicializando banco PostgreSQL...');
 
   const schemaPath = path.join(__dirname, 'schema.sql');
   const schemaSql = fs.readFileSync(schemaPath, 'utf8');
-  db.exec(schemaSql);
+  await pool.query(schemaSql);
   console.log('✅ Tabelas criadas/verificadas.');
 
-  const row = db.prepare('SELECT COUNT(*) as count FROM products').get();
-  if (row.count === 0) {
+  const result = await pool.query('SELECT COUNT(*)::int as count FROM products');
+  if (result.rows[0].count === 0) {
     console.log('🌱 Inserindo produtos iniciais...');
-    const insert = db.prepare(
-      'INSERT INTO products (name, price, category, description) VALUES (?, ?, ?, ?)'
-    );
     const items = [
       ['Arroz, Feijão e Bife', 24.90, 'Almoço', 'Arroz, feijão, bife acebolado, ovo e salada.'],
       ['Frango Grelhado com Legumes', 22.90, 'Almoço', 'Filé de frango grelhado com legumes salteados e arroz.'],
@@ -34,49 +34,23 @@ function initDb() {
       ['Água com Gás 500ml', 4.00, 'Água com Gás', 'Garrafa de água mineral com gás.'],
       ['Água sem Gás 500ml', 3.50, 'Água sem Gás', 'Garrafa de água mineral natural.'],
     ];
-    const tx = db.transaction((list) => {
-      for (const item of list) insert.run(...item);
-    });
-    tx(items);
+    for (const item of items) {
+      await pool.query(
+        'INSERT INTO products (name, price, category, description) VALUES ($1, $2, $3, $4)',
+        item
+      );
+    }
     console.log('🌱 Produtos iniciais inseridos.');
   }
 }
 
-function convertParams(sql) {
-  return sql.replace(/\$(\d+)/g, '?');
-}
-
 async function query(text, params = []) {
-  const sql = convertParams(text);
-  const stmt = db.prepare(sql);
-  const upper = text.trim().toUpperCase();
-
-  if (upper.startsWith('SELECT') || upper.includes('RETURNING')) {
-    const rows = stmt.all(...params);
-    return { rows };
-  }
-
-  if (upper.startsWith('INSERT') || upper.startsWith('UPDATE') || upper.startsWith('DELETE')) {
-    const result = stmt.run(...params);
-    if (upper.startsWith('INSERT')) {
-      return { rows: [{ id: Number(result.lastInsertRowid) }] };
-    }
-    if (result.changes > 0) {
-      return { rows: [{ changes: result.changes }] };
-    }
-    return { rows: [] };
-  }
-
-  stmt.run(...params);
-  return { rows: [] };
+  const result = await pool.query(text, params);
+  return { rows: result.rows };
 }
 
 function isMock() {
   return false;
 }
 
-module.exports = {
-  query,
-  initDb,
-  isMock,
-};
+module.exports = { query, initDb, isMock, pool };
