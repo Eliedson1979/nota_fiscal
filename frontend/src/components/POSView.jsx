@@ -328,8 +328,7 @@ export default function POSView({ onOrderPlaced }) {
                 style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}
               >
                 <span>
-                  Não foi possível conectar ao backend. Verifique se o servidor
-                  está rodando na porta 3001.
+                  Não foi possível conectar ao backend.
                 </span>
               </span>
             </div>
